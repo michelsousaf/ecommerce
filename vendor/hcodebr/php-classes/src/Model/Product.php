@@ -4,11 +4,16 @@ use \Hcode\DB\Sql;
 use \Hcode\Model;
 use \Hcode\Mailer;
 class Product extends Model {
-	public static function listAll()
+
+
+		public static function listAll()
 	{
 		$sql = new Sql();
 		return $sql->select("SELECT * FROM tb_products ORDER BY desproduct");
 	}
+
+
+
 	public static function checkList($list)
 	{
 		foreach ($list as &$row) {
@@ -40,7 +45,9 @@ class Product extends Model {
 		$results = $sql->select("SELECT * FROM tb_products WHERE idproduct = :idproduct", [
 			':idproduct'=>$idproduct
 		]);
+
 		$this->setData($results[0]);
+
 	}
 	public function delete()
 	{
@@ -76,6 +83,7 @@ class Product extends Model {
 
 	public function setPhoto($file)
 	{
+		//var_dump($file);
 		$extension = explode('.', $file['name']);
 		$extension = end($extension);
 		switch ($extension) {
@@ -97,11 +105,12 @@ class Product extends Model {
 			"products" . DIRECTORY_SEPARATOR . 
 			$this->getidproduct() . ".jpg";
 		imagejpeg($image, $dist);
+
 		imagedestroy($image);
 		$this->checkPhoto();
 	}
 
-	
+
 	public function getFromURL($desurl)
 	{
 		$sql = new Sql();
