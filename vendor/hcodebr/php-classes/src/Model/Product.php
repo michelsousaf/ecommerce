@@ -73,6 +73,7 @@ class Product extends Model {
 		return $this->setdesphoto($url);
 	}
 
+
 	public function getValues()
 	{
 		$this->checkPhoto();
