@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
               <label for="vlweight">URL</label>
-              <input type="url" class="form-control" id="desurl" name="desurl" step="0.01" placeholder="0.00">
+              <input type="text" class="form-control" id="desurl" name="desurl" step="0.01" placeholder="0.00">
             </div>
           </div>
           <!-- /.box-body -->
