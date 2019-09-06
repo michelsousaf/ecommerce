@@ -43,12 +43,12 @@
                             <li><a href="/profile"><i class="fa fa-user"></i> Minha Conta</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Lista de Desejos</a></li>
                             <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Meu Carrinho</a></li>
-                       
-                            <li><a href="/profile"><i class="fa fa-user"></i></a></li>
+                            <?php if( checkLogin(false) ){ ?>
+                            <li><a href="/profile"><i class="fa fa-user"></i> <?php echo getUserName(); ?></a></li>
                             <li><a href="/logout"><i class="fa fa-close"></i> Sair</a></li>
-                            
+                            <?php }else{ ?>
                             <li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
-                            
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">moeda :</span><span class="value">BRL </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">Moeda :</span><span class="value">BRL </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">BRL</a></li>
                                     <li><a href="#">USD</a></li>
@@ -90,7 +90,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="/cart">Carrinho - <span class="cart-amunt">$22.50</span> <i class="fa fa-shopping-cart"></i> <span class="product-count"></span></a>
+                        <a href="/cart">Carrinho - <span class="cart-amunt">R$<?php echo getCartVlSubTotal(); ?></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo getCartNrQtd(); ?></span></a>
                     </div>
                 </div>
             </div>
