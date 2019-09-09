@@ -284,10 +284,12 @@ class User  extends Model {
 		User::clearSuccess();
 		return $msg;
 	}
+
 	public static function clearSuccess()
 	{
 		$_SESSION[User::SUCCESS] = NULL;
 	}
+
 	public static function setErrorRegister($msg)
 	{
 		$_SESSION[User::ERROR_REGISTER] = $msg;
@@ -298,6 +300,7 @@ class User  extends Model {
 		User::clearErrorRegister();
 		return $msg;
 	}
+
 	public static function clearErrorRegister()
 	{
 		$_SESSION[User::ERROR_REGISTER] = NULL;
@@ -306,7 +309,7 @@ class User  extends Model {
 
 
 
-/*		public static function checkLoginExist($login)
+		public static function checkLoginExist($login)
 	{
 		$sql = new Sql();
 		$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :deslogin", [
@@ -314,7 +317,7 @@ class User  extends Model {
 		]);
 		return (count($results) > 0);
 	}
-*/
+
 
 
 
