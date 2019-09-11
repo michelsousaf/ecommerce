@@ -24,7 +24,7 @@ class Cart extends Model {
 				];
 				if (User::checkLogin(false)) {
 					$user = User::getFromSession();
-					//seta dentro do array iduser
+					
 					$data['iduser'] = $user->getiduser();	
 				}
 				$cart->setData($data);
@@ -34,6 +34,7 @@ class Cart extends Model {
 		}
 		return $cart;
 	}
+
 
 		public function setToSession()
 	{
@@ -65,6 +66,8 @@ class Cart extends Model {
 			':vlfreight'=>$this->getvlfreight(),
 			':nrdays'=>$this->getnrdays()
 		]);
+
+		echo "id usuario ".$this->getiduser();
 		$this->setData($results[0]);
 	}
 

@@ -16,6 +16,8 @@ class User  extends Model {
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
 	const SUCCESS = "UserSucesss";
+	//const SESSION_CART = "Cart";
+
 
 
 	public static function getFromSession()
@@ -98,6 +100,7 @@ class User  extends Model {
 	public static function logout()
 	{
 		$_SESSION[User::SESSION] = NULL;
+		//$_SESSION[User::SESSION_CART] = NULL;
 	}
 
 		public static function listAll()

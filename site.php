@@ -118,9 +118,17 @@ $app->post("/cart/freight", function(){
 
 
 $app->get("/checkout", function(){
+
 	User::verifyLogin(false);
 	$address = new Address();
+
+
+
 	$cart = Cart::getFromSession();
+
+	var_dump($cart);
+
+
 	if (!isset($_GET['zipcode'])) {
 		$_GET['zipcode'] = $cart->getdeszipcode();
 	}
@@ -150,49 +158,42 @@ $app->get("/checkout", function(){
 
 $app->post("/checkout", function(){
 	User::verifyLogin(false);
-	if(!isset($_POST['zipcode']) || $_POST['zipcode'] === '')
-	{
-		Address::setMsgError("Informe o CEP");
+	if (!isset($_POST['zipcode']) || $_POST['zipcode'] === '') {
+		Address::setMsgError("Informe o CEP.");
 		header('Location: /checkout');
 		exit;
 	}
-	if(!isset($_POST['desaddress']) || $_POST['desaddress'] === '')
-	{
-		Address::setMsgError("Informe o Endereço");
+	if (!isset($_POST['desaddress']) || $_POST['desaddress'] === '') {
+		Address::setMsgError("Informe o endereço.");
 		header('Location: /checkout');
 		exit;
 	}
-	if(!isset($_POST['desdistrict']) || $_POST['desdistrict'] === '')
-	{
-		Address::setMsgError("Informe o Bairro");
+	if (!isset($_POST['desdistrict']) || $_POST['desdistrict'] === '') {
+		Address::setMsgError("Informe o bairro.");
 		header('Location: /checkout');
 		exit;
 	}
-	if(!isset($_POST['descity']) || $_POST['descity'] === '')
-	{
-		Address::setMsgError("Informe a Cidade");
+	if (!isset($_POST['descity']) || $_POST['descity'] === '') {
+		Address::setMsgError("Informe a cidade.");
 		header('Location: /checkout');
 		exit;
 	}
-	if(!isset($_POST['desstate']) || $_POST['desstate'] === '')
-	{
-		Address::setMsgError("Informe o Estado");
+	if (!isset($_POST['desstate']) || $_POST['desstate'] === '') {
+		Address::setMsgError("Informe o estado.");
 		header('Location: /checkout');
 		exit;
 	}
-	if(!isset($_POST['descountry']) || $_POST['descountry'] === '')
-	{
-		Address::setMsgError("Informe o País");
+	if (!isset($_POST['descountry']) || $_POST['descountry'] === '') {
+		Address::setMsgError("Informe o país.");
 		header('Location: /checkout');
 		exit;
 	}
 	$user = User::getFromSession();
-	$address = new address();
+	$address = new Address();
 	$_POST['deszipcode'] = $_POST['zipcode'];
 	$_POST['idperson'] = $user->getidperson();
 	$address->setData($_POST);
 	$address->save();
-	
 	$cart = Cart::getFromSession();
 	$cart->getCalculateTotal();
 	$order = new Order();
@@ -201,19 +202,10 @@ $app->post("/checkout", function(){
 		'idaddress'=>$address->getidaddress(),
 		'iduser'=>$user->getiduser(),
 		'idstatus'=>OrderStatus::EM_ABERTO,
-        'vltotal'=>$cart->getvltotal()
+		'vltotal'=>$cart->getvltotal()
 	]);
 	$order->save();
 	header("Location: /order/".$order->getidorder());
-/*	switch ((int)$_POST['payment-method']) {
-		case 1:
-			header("Location: /order/".$order->getidorder()."/pagseguro");
-			break;
-		case 2:
-			header("Location: /order/".$order->getidorder()."/paypal");
-			break;
-	}
-	header("Location: /order/".$order->getidorder());*/
 	exit;
 });
 
