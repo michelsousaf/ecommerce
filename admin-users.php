@@ -30,7 +30,8 @@ $app->get('/admin/users', function() {
 	$page->setTpl("users", array(
 		"users"=>$pagination['data'],
 		"search"=>$search,
-		"pages"=>$pages
+		"pages"=>$pages,
+		"totalRegistro"=>$pagination['total']
 	));
     	
 
