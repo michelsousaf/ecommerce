@@ -153,7 +153,7 @@ class Product extends Model {
 		$results = $sql->select("
 			SELECT SQL_CALC_FOUND_ROWS *
 			FROM tb_products 
-			WHERE desproduct LIKE :search
+			WHERE desproduct LIKE :search OR vlprice LIKE :search
 			ORDER BY desproduct
 			LIMIT $start, $itemsPerPage;
 		", [
