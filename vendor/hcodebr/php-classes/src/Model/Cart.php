@@ -67,7 +67,7 @@ class Cart extends Model {
 			':nrdays'=>$this->getnrdays()
 		]);
 
-		echo "id usuario ".$this->getiduser();
+		//echo "id usuario ".$this->getiduser();
 		$this->setData($results[0]);
 	}
 

@@ -5,7 +5,7 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8">
-    
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hcode Store</title>
@@ -112,7 +112,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="#">Produtos</a></li>
+                        <li><a href="/produtos">Produtos</a></li>
                         <li><a href="/cart">Carrinho</a></li>
                     </ul>
                 </div>  
