@@ -126,7 +126,7 @@ $app->get("/checkout", function(){
 
 	$cart = Cart::getFromSession();
 
-	var_dump($cart);
+	//var_dump($cart);
 
 
 	if (!isset($_GET['zipcode'])) {
@@ -205,9 +205,33 @@ $app->post("/checkout", function(){
 		'vltotal'=>$cart->getvltotal()
 	]);
 	$order->save();
-	header("Location: /order/".$order->getidorder() ."/pagseguro");
+	switch ((int)$_POST['payment-method']) {
+		case 1:
+		header("Location: /order/".$order->getidorder()."/pagseguro");
+		break;
+		case 2:
+		header("Location: /order/".$order->getidorder()."/paypal");
+		break;
+	}
 	exit;
 });
+
+$app->get("/order/:idorder/paypal", function($idorder){
+	User::verifyLogin(false);
+	$order = new Order();
+	$order->get((int)$idorder);
+	$cart = $order->getCart();
+	$page = new Page([
+		'header'=>false,
+		'footer'=>false
+	]);
+	$page->setTpl("payment-paypal", [
+		'order'=>$order->getValues(),
+		'cart'=>$cart->getValues(),
+		'products'=>$cart->getProducts()
+	]);
+});
+
 
 
 $app->get("/order/:idorder/pagseguro", function($idorder){
